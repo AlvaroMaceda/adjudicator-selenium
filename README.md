@@ -23,7 +23,7 @@ a browser and, later, attach the filler to it:
 3) Login, and create a request. The request should be empty
 
 After that, a very important thing to do: you should modify the styles of "add" button
-using using devtools. Look for this button (the one used to add files):
+using using devtools. Look for this button (the one used to add lines):
 ```
 <button type="button" class="afegir" title="Añadir fila"><img src="imgs/botons/afegir.gif" alt="Afegir fila"></button>
 ```

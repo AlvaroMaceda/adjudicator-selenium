@@ -1,3 +1,4 @@
 .env
+filler/data.py
 /tmp
 __pycache__
