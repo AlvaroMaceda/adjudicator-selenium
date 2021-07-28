@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+import time
+
+from data import CODES
 
 import os
 from dotenv import load_dotenv
@@ -17,11 +20,18 @@ chrome_options = Options()
 chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
 driver = webdriver.Chrome(WEBDRIVER_PATH, chrome_options=chrome_options)
 
+
+action = webdriver.ActionChains(driver)
+
 #driver.get('https://appweb.edu.gva.es/adjudicacio/init.do?lang=es&conv=202107590')
 
-l=driver.find_element_by_xpath("//button[@class='afegir']")
-l.click()
-l=driver.find_element_by_xpath('(//input[@name="centre"])[last()]')
-l.send_keys('46025799')
-l=driver.find_element_by_xpath("//button[@class='afegir']")
-l.click()
+for code in CODES:
+    btn_add = driver.find_element_by_xpath("//button[@class='afegir']")
+    btn_add.click()
+    # Move to avoid hover over the buttons, because the overlow intercepts click
+    # action.move_by_offset(200, 200)
+    fld_code = driver.find_element_by_xpath('(//input[@name="centre"])[last()]')
+    fld_code.send_keys(code)
+    action.move_to_element(fld_code)
+    # We need this to trigger the AJAX request
+    fld_code.send_keys(Keys.TAB)
