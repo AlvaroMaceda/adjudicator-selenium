@@ -14,6 +14,7 @@ GVA_PASSWORD = os.getenv('GVA_PASSWORD')
 WEBDRIVER_PATH = r'/snap/bin/chromium.chromedriver'
 
 chrome_options = Options()
+
 # This is to attach to a browser.
 # The browser should have been launched like:
 # /opt/google/chrome/chrome --remote-debugging-port=9222 --user-data-dir='/tmp/banana'
@@ -28,8 +29,6 @@ action = webdriver.ActionChains(driver)
 for code in CODES:
     btn_add = driver.find_element_by_xpath("//button[@class='afegir']")
     btn_add.click()
-    # Move to avoid hover over the buttons, because the overlow intercepts click
-    # action.move_by_offset(200, 200)
     fld_code = driver.find_element_by_xpath('(//input[@name="centre"])[last()]')
     fld_code.send_keys(code)
     action.move_to_element(fld_code)
